@@ -1,59 +1,78 @@
-                      
+# Myntra Clone — Checkout Experience
 
-# Checkout Optimization Project
+[![Live demo](https://img.shields.io/badge/demo-live-22c55e)](https://s-harshni.github.io/Checkout-Experience-Optimization/)
+![HTML5](https://img.shields.io/badge/HTML5-e34f26?logo=html5&logoColor=white)
+![CSS3](https://img.shields.io/badge/CSS3-1572b6?logo=css3&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-vanilla-f7df1e?logo=javascript&logoColor=black)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-4-7952b3?logo=bootstrap&logoColor=white)
 
-This is a clone of the Myntra e-commerce website, built using HTML,CSS and JavaScript.Myntra is a major Indian fashion e-commerce company headquartered in Bengaluru, Karnataka, India. The company was founded in 2007-2008 to sell personalized gift items. In May 2014, Myntra.com was acquired by Flipkart.
+<!-- live-links -->
+> 🔗 **Live demo:** [s-harshni.github.io/Checkout-Experience-Optimization](https://s-harshni.github.io/Checkout-Experience-Optimization/)  
+> 👤 **Portfolio:** [s-harshni.github.io/S-Harshni](https://s-harshni.github.io/S-Harshni/)  
+<!-- live-links -->
 
-<h1>Live Demo </h1>-- https://myntra8.netlify.app/
+A front-end clone of the Myntra fashion store focused on the **shopping-to-checkout journey**: browse, filter and sort products, add them to the bag, then go through the address → payment → order-confirmation steps. Built with plain HTML, CSS and JavaScript; cart, wishlist, address and payment state live in `localStorage`.
 
-## Tech Stack
-- HTML
-- CSS
-- Javascript - (DOM Manipulation, Local Storage)
-- Bootstrap
-- Git
-- github
-
+![Home page](docs/screenshots/home.png)
 
 ## Features
 
-The following features have been implemented in the project:
+- **Home page:** mega-menu navigation, sliding banners, deal and brand carousels
+- **Product listings** (women's tops, men's t-shirts): product cards with price, MRP and discount
+  - **Sort:** recommended, what's new, popularity, discount, price high→low / low→high
+  - **Filter:** brand (built from the product data), price range, minimum discount, combinable with sorting
+  - **Add to bag** and **wishlist** on every card, with live bag and wishlist counters
+- **Bag:** item list, remove / move to wishlist, price details (MRP, discount, total), coupon and donation widgets
+- **Checkout:** delivery-address form → payment form → order confirmation
+- **Accounts:** sign-in / sign-up / OTP screens (front-end only)
 
+## Screenshots
 
-- Home Page:- Nav Bar, sliding banners & slider for Products.
-- ![Screenshot_20230909_205036](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/374438bd-6b9c-4a09-8cd1-f5c49b1952f3)
+| Listing with filters | Bag |
+|---|---|
+| ![Product listing with filters](docs/screenshots/listing-filters.png) | ![Bag](docs/screenshots/bag.png) |
 
-- ![Screenshot_20230909_205050](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/204c590d-4504-402e-ac56-8985b81b84dd)
+| Address | Payment |
+|---|---|
+| ![Address](docs/screenshots/address.png) | ![Payment](docs/screenshots/payment.png) |
 
-- Sign-In:- User authentication to check whether user email and password match with details existing in the database.
-- ![Screenshot_20230909_205131](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/69df8de6-3e6e-4906-871a-d303ae73dcf3)
+## Run locally
 
-- User authentication (login) 
-- Responsiveness for different screen sizes
-- Browse products by category
-- ![Screenshot_20230909_205112](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/b1790f36-ed38-430f-9eed-d1efae8be7b2)
+No build step is needed. Serve the `final/index` folder with any static server:
 
-- Sorting products for reccomended, What's new, popularity, Price high to low and low to High
-- Filter products in pages based on brand, colour, Price, and discount
-- Add products to cart,a remove button to remove from cart
-- ![Screenshot_20230909_205251](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/55975856-36b8-4271-9e71-51094811a9b0)
+```bash
+git clone https://github.com/S-Harshni/Checkout-Experience-Optimization.git
+cd Checkout-Experience-Optimization/final/index
+python3 -m http.server 8000     # then open http://localhost:8000
+```
 
-- Address page lets you input and displays address, and then through the payment page
-- ![Screenshot_20230909_205312](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/2d0ea216-4a84-4c4b-a831-4241167026a6)
+## Project structure
 
-- Checkout and payment processing
-- ![Screenshot_20230909_205336](https://github.com/Htripathi07/team8_Myntra_clone_project/assets/120841935/043d5c98-276c-41e1-a8f4-d17b4f2fcbdc)
+```
+final/index/        the finished storefront (deployed to GitHub Pages)
+  index.html          home page
+  kurtawomen.html     women's tops listing      tshirt.html   men's t-shirts listing
+  filters.js          brand / price / discount filters shared by both listings
+  bag.html            bag + price details        wishlist.html
+  Daddress.*          delivery address           Dpayment.*    payment
+  Dcart.*             order confirmation          signin / signup / otp
+Address/, Payment/, SuccessfulOrder/, myntralandpage/, navbar/, footer/, rohit/
+                    individual team members' working drafts
+```
 
+## Fixes in this version
 
-## Deployed on(netlify):
- 
- https://myntra8.netlify.app/
- 
+The storefront had several bugs that stopped the checkout journey from working:
+- **No way to add items to the bag.** The add-to-bag handler was commented out, so every card now has an *Add to bag* button.
+- **Filters threw errors.** The filter code targeted brand/colour IDs that didn't exist, and the first missing element aborted the rest of the script. It's replaced by a working brand / price / discount filter (`filters.js`).
+- **An empty bag crashed the bag page** (`JSON.parse(null).reduce`).
+- Wrong-case asset names (`DAddress.css`) broke the address page on case-sensitive hosting, and placeholder `href="/"` links left the site. Missing header images were replaced.
+- Added GitHub Actions deployment to GitHub Pages (the previous Netlify deployment is offline).
 
+## Credits
 
+Originally built as a team project, **team8_Myntra_clone_project**, by Hariom Tripathi, Chirag Arora, Rohit Kumar Gupta, Shubham Sharma and Md Dilnawaz Alam (see [`team.txt`](team.txt)). Product images are loaded from Myntra's public CDN for demonstration only. This is a learning project, not affiliated with Myntra.
 
+## Author
 
-
-
-
-
+**S Harshni** · [Portfolio](https://s-harshni.github.io/S-Harshni/) · [LinkedIn](https://www.linkedin.com/in/ks-harshni/) · [GitHub](https://github.com/S-Harshni)

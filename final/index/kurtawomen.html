@@ -175,7 +175,7 @@
                        </ul>
                        </div>
                        <div id="d2">  
-                        <h5 class="h5"><a href="/">Indian &amp; Festive Wear</a></h5>
+                        <h5 class="h5"><a href="index.html">Indian &amp; Festive Wear</a></h5>
                         <ul>
                            <li><a href="#">Kurtas &amp; Kurta Sets</a></li>
                            <li><a href="#">Sherwanis</a></li>
@@ -185,7 +185,7 @@
                     </div>
               
               <div id="d3">
-                 <h5 class="h5"><a href="/">Bottom Wear</a></h5>
+                 <h5 class="h5"><a href="index.html">Bottom Wear</a></h5>
                  <ul>
                   <li><a href="#">Jeans</a></li>
                   <li><a href="#">Causal Trousers</a></li>
@@ -196,7 +196,7 @@
 
                  </div> 
                  <div id="d4">
-                 <h5 class="h5"><a href="/"></a>Innerwear &amp; Joggers</h5>
+                 <h5 class="h5"><a href="index.html"></a>Innerwear &amp; Joggers</h5>
                  <ul>
                   <li><a href="#">Briefs &amp; Trunks</a></li>
                   <li><a href="#">Boxers</a></li>
@@ -204,13 +204,13 @@
                   <li><a href="#">Sleepwear &amp; Loungewear</a></li>
                   <li><a href="#">Thermals</a></li>
                  </ul>
-                 <h5 class="h5"><a href="/"></a>Plus Size</h5>
+                 <h5 class="h5"><a href="index.html"></a>Plus Size</h5>
 
                </div> 
              
 
              <div id="d5">
-             <h5 class="h5"><a href="/">Footwear</a></h5>
+             <h5 class="h5"><a href="index.html">Footwear</a></h5>
              <ul>
                  <li><a href="#">Casual Shoes</a></li>
                  <li><a href="#">Sports Shoes</a></li>
@@ -348,16 +348,16 @@
               </ul>
            </div>
      <div id="d3">
-        <h5 class="h5"><a href="/">Footwear</a></h5>
+        <h5 class="h5"><a href="index.html">Footwear</a></h5>
         <ul>
          <li><a href="#">Casual Shoes</a></li>
          <li><a href="#">Flipflops</a></li>
-         <li><a href="/">Sports Shoes</a></li>
-         <li><a href="/">Flats</a></li>
-         <li><a href="/">Sandals</a></li>
-         <li><a href="/">Heels</a></li>
-         <li><a href="/">School Shoes</a></li>
-         <li><a href="/">Socks</a></li>
+         <li><a href="index.html">Sports Shoes</a></li>
+         <li><a href="index.html">Flats</a></li>
+         <li><a href="index.html">Sandals</a></li>
+         <li><a href="index.html">Heels</a></li>
+         <li><a href="index.html">School Shoes</a></li>
+         <li><a href="index.html">Socks</a></li>
         </ul>
         </div>
         <div id="d4">
@@ -556,7 +556,7 @@
   <li><a href="#">MCaffeine</a></li>
   <li><a href="#">Nivea</a></li> 
 </ul>
-<h5 class="h5"><a href="/">Home &amp; Bath</a></h5>
+<h5 class="h5"><a href="index.html">Home &amp; Bath</a></h5>
 </div>
 </div>
 </div>
@@ -829,6 +829,7 @@
 </body>
 </html>
 
+<script src="filters.js"></script>
 <script>
 let KurtisTunics = [
   {
@@ -1134,7 +1135,19 @@ let   append_data=document.getElementById("append_data")
     box.append(brand,type)
     div3.append(price,MP,off)
     div2.append(div3)
-    div1.append(img,box,div2)
+    // Add-to-bag button (the old image-click handler was commented out, so nothing could reach the bag).
+    let bagBtn = document.createElement("button")
+    bagBtn.className = "add_bag_btn"
+    bagBtn.innerText = "ADD TO BAG"
+    bagBtn.style.cssText = "margin-top:8px;width:100%;padding:8px 0;border:1px solid #ff3f6c;background:#ff3f6c;color:#fff;font-weight:700;font-size:12px;letter-spacing:1px;cursor:pointer;border-radius:3px"
+    bagBtn.addEventListener("click", function (event) {
+      event.stopPropagation()
+      addToCart(el)
+      bagBtn.innerText = "ADDED ✓"
+      bagBtn.style.background = "#fff"
+      bagBtn.style.color = "#ff3f6c"
+    })
+    div1.append(img,box,div2,bagBtn)
   
     append_data.append(div1)
   
@@ -1210,418 +1223,6 @@ console.log("insideWishList")
 /////  array key name same dalna he 
 
 
-// filter 
-let filter = document.querySelector(".check_box");
-
-filter.addEventListener("click",filterFun)
-
-document.getElementById("Highlander").addEventListener("click", function(){
-  // console.log("click")
-  highlanderSort(KurtisTunics)
-})
-
-function highlanderSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.brand == "HIGHLANDER"){
-      console.log("highlinder")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-document.getElementById("ether").addEventListener("click", function(){
-  console.log("click")
- etherSort(KurtisTunics)
-})
-
-function etherSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.brand == "ether"){
-      console.log("ether")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-
-document.getElementById("U.S Polo Assn").addEventListener("click", function(){
-  console.log("click")
- USSort(KurtisTunics)
-})
-
-function USSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.brand == "U.S Polo Assn"){
-      console.log("U.S Polo Assn")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-
-// arr.length ;
-
-
-
-
-
-
-function filterFun(){
-     let appendarr=[]
-  for(let i = 0; i<KurtisTunics.length ;i++){
-
-    if(KurtisTunics[i].brand == "Roadster"){
-       appendarr.push(KurtisTunics[i])
-      
-    } 
-    // console.log("filter",appendarr)
-    // mensData(appendarr)
-   
-    console.log("dafdfaefadf")
-    console.log("filter",appendarr)
-    mensData(appendarr)
-    // else if()
-  }
-  
- 
- 
-
-  // KurtisTunics.filter
-}
-// filterFun()
-
-// color 
-
-document.getElementById("blue").addEventListener("click", function(){
-  console.log("click")
- blueSort(KurtisTunics)
-})
-
-function blueSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.color == "blue"){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-document.getElementById("white").addEventListener("click", function(){
-  console.log("click")
- whiteSort(KurtisTunics)
-})
-
-function whiteSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.color == "white"){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-document.getElementById("black").addEventListener("click", function(){
-  console.log("click")
- blackSort(KurtisTunics)
-})
-
-function blackSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.color == "black"){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-document.getElementById("green").addEventListener("click", function(){
-  console.log("click")
- greenSort(KurtisTunics)
-})
-
-function greenSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.color == "green"){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-
-document.getElementById("grey").addEventListener("click", function(){
-  console.log("click")
- greySort(KurtisTunics)
-})
-
-function greySort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.color == "gray"){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-document.getElementById("red").addEventListener("click", function(){
-  console.log("click")
- redSort(KurtisTunics)
-})
-
-function redSort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(elem.color == "red"){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  console.log(sortedData)
-  mensData(sortedData)
-}
-
-document.getElementById("279").addEventListener("click", function(){
-  console.log("click")
-  p1Sort(KurtisTunics)
-})
-
-function p1Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.price) >= 279&& Number(elem.price) <= 499){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.price - b.price;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-document.getElementById("479").addEventListener("click", function(){
-  console.log("click")
-  p2Sort(KurtisTunics)
-})
-
-function p2Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.price) >= 479&& Number(elem.price) <= 799){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.price - b.price;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-
-document.getElementById("579").addEventListener("click", function(){
-  console.log("click")
-  p3Sort(KurtisTunics)
-})
-
-function p3Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.price) >= 579&& Number(elem.price) <= 999){
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-
-  
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.price - b.price;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-document.getElementById("10").addEventListener("click", function(){
-  console.log("click")
-  off1Sort(KurtisTunics)
-})
-
-function off1Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.offer) >= 10) {
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-
-  
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.offer - b.offer;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-
-document.getElementById("20").addEventListener("click", function(){
-  console.log("click")
-  off2Sort(KurtisTunics)
-})
-
-function off2Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.offer) >= 20) {
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-
-  
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.offer - b.offer;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-document.getElementById("30").addEventListener("click", function(){
-  console.log("click")
-  off3Sort(KurtisTunics)
-})
-
-function off3Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.offer) >= 30) {
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-
-  
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.offer - b.offer;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-document.getElementById("40").addEventListener("click", function(){
-  console.log("click")
-  off4Sort(KurtisTunics)
-})
-
-function off4Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.offer) >= 40) {
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-
-  
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.offer - b.offer;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
-
-
-document.getElementById("50").addEventListener("click", function(){
-  console.log("click")
-  off5Sort(KurtisTunics)
-})
-
-function off5Sort(KurtisTunics){
-  
-  let sortedData = KurtisTunics.filter(function(elem) {
-    if(Number(elem.offer) >= 50) {
-      console.log("blue")
-      return elem
-     
-    }
-
-  });
-
-  
-  let sortedOrder = sortedData.sort(function(a,b){
-    return a.offer - b.offer;
-  })
-  console.log(sortedOrder)
-  mensData(sortedOrder)
-}
+// Sidebar filters (brand / price / discount): see filters.js
+setupFilters(KurtisTunics, mensData)
 </script>
